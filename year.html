@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Учебна година · Erasmus Archive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a href="index.html" class="brand">
+      <span class="brand__mark">E+</span>
+      <span>Erasmus Archive</span>
+    </a>
+    <nav class="main-nav" aria-label="Основна навигация">
+      <a href="index.html" data-i18n="nav_home">Начало</a>
+      <a href="years.html" aria-current="page" data-i18n="nav_years">Години</a>
+      <a href="about.html" data-i18n="nav_about">За проекта</a>
+    </nav>
+    <div class="lang-switch" role="group" aria-label="Избор на език">
+      <button data-lang="bg" aria-pressed="true">BG</button>
+      <button data-lang="en" aria-pressed="false">EN</button>
+    </div>
+    <button class="nav-toggle" aria-label="Меню">☰</button>
+  </div>
+</header>
+
+<main id="year-content">
+  <section class="year-hero container">
+    <div class="breadcrumb">
+      <a href="index.html" data-i18n="nav_home">Начало</a> /
+      <a href="years.html" data-i18n="nav_years">Години</a> /
+      <span id="year-period">…</span>
+    </div>
+    <h1 class="year-hero__title" id="year-title">…</h1>
+    <p class="year-hero__summary" id="year-summary"></p>
+  </section>
+
+  <section class="visits-section container">
+    <div id="visits-container"></div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    <span data-i18n="footer_text">Еразъм+ Архив · Изграден от Алиса</span>
+    <span>hardyxstyle</span>
+  </div>
+</footer>
+
+<script src="data/index.js"></script>
+<script src="data/2025-2026.js"></script>
+<script src="js/common.js"></script>
+<script src="js/year.js"></script>
+</body>
+</html>

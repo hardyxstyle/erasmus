@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Посещение · Erasmus Archive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a href="index.html" class="brand">
+      <span class="brand__mark">E+</span>
+      <span>Erasmus Archive</span>
+    </a>
+    <nav class="main-nav" aria-label="Основна навигация">
+      <a href="index.html" data-i18n="nav_home">Начало</a>
+      <a href="years.html" data-i18n="nav_years">Години</a>
+      <a href="about.html" data-i18n="nav_about">За проекта</a>
+    </nav>
+    <div class="lang-switch" role="group" aria-label="Избор на език">
+      <button data-lang="bg" aria-pressed="true">BG</button>
+      <button data-lang="en" aria-pressed="false">EN</button>
+    </div>
+    <button class="nav-toggle" aria-label="Меню">☰</button>
+  </div>
+</header>
+
+<main>
+  <section class="visit-hero container">
+    <div class="breadcrumb">
+      <a href="index.html" data-i18n="nav_home">Начало</a> /
+      <a href="#" id="breadcrumb-year">…</a> /
+      <span id="visit-country-crumb">…</span>
+    </div>
+    <h1 class="visit-hero__title" id="visit-country">…</h1>
+    <div class="visit-hero__meta">
+      <span id="meta-type"></span>
+      <span id="meta-date"></span>
+    </div>
+    <p class="visit-hero__desc" id="visit-desc"></p>
+  </section>
+
+  <section class="intro-video-section container" id="intro-video-section" hidden>
+    <video id="intro-video" controls preload="metadata"></video>
+  </section>
+
+  <section class="itinerary-section container" id="itinerary-section" hidden>
+    <div class="section-head">
+      <h2 data-bg="Дневник на мобилността" data-en="Mobility journal" id="itinerary-head">Дневник на мобилността</h2>
+    </div>
+    <div class="itinerary" id="itinerary-list"></div>
+  </section>
+
+  <section class="gallery-section container">
+    <div class="section-head">
+      <h2 data-bg="Снимки и видео" data-en="Photos and video" id="gallery-head">Снимки и видео</h2>
+    </div>
+    <div class="gallery-grid" id="gallery-grid"></div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    <span data-i18n="footer_text">Еразъм+ Архив · Изграден от Алиса</span>
+    <span>hardyxstyle</span>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox">
+  <button class="lightbox__close" id="lightbox-close" aria-label="Затвори">✕</button>
+  <button class="lightbox__nav lightbox__nav--prev" id="lightbox-prev" aria-label="Предишна">‹</button>
+  <div class="lightbox__content" id="lightbox-content"></div>
+  <button class="lightbox__nav lightbox__nav--next" id="lightbox-next" aria-label="Следваща">›</button>
+</div>
+
+<script src="data/index.js"></script>
+<script src="data/2025-2026.js"></script>
+<script src="js/common.js"></script>
+<script src="js/visit.js"></script>
+</body>
+</html>

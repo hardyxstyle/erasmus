@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Еразъм+ Архив</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a href="index.html" class="brand">
+      <span class="brand__mark">E+</span>
+      <span>Erasmus Archive</span>
+    </a>
+    <nav class="main-nav" aria-label="Основна навигация">
+      <a href="index.html" aria-current="page" data-i18n="nav_home">Начало</a>
+      <a href="years.html" data-i18n="nav_years">Години</a>
+      <a href="about.html" data-i18n="nav_about">За проекта</a>
+    </nav>
+    <div class="lang-switch" role="group" aria-label="Избор на език">
+      <button data-lang="bg" aria-pressed="true">BG</button>
+      <button data-lang="en" aria-pressed="false">EN</button>
+    </div>
+    <button class="nav-toggle" aria-label="Меню">☰</button>
+  </div>
+</header>
+
+<main>
+  <section class="hero container">
+    <p class="hero__eyebrow" data-i18n="hero_eyebrow">Еразъм+ · Архив на пътуванията</p>
+    <h1 class="hero__title">
+      <span data-i18n="hero_title_1">Всяка година,</span>
+      <em data-i18n="hero_title_2">нов печат</em>
+    </h1>
+    <p class="hero__lede" data-i18n="hero_lede">
+      Хроника на участието ни в програма Еразъм+ — обмен на опит, гостуващи учители и моменти от училища в цяла Европа.
+    </p>
+    <div class="hero__actions">
+      <a href="years.html" class="btn btn--primary" data-i18n="btn_explore">Разгледай годините</a>
+      <a href="about.html" class="btn btn--ghost" data-i18n="btn_about">За програмата</a>
+    </div>
+
+    <div class="hero__stats">
+      <div class="stat">
+        <span class="stat__num" id="stat-years">0</span>
+        <span class="stat__label" data-i18n="stat_years">учебни години</span>
+      </div>
+      <div class="stat">
+        <span class="stat__num" id="stat-countries">0</span>
+        <span class="stat__label" data-i18n="stat_countries">посетени държави</span>
+      </div>
+      <div class="stat">
+        <span class="stat__num" id="stat-visits">0</span>
+        <span class="stat__label" data-i18n="stat_visits">посещения общо</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="years-section container">
+    <div class="section-head">
+      <div>
+        <h2 data-i18n="years_head">Учебни години</h2>
+        <p data-i18n="years_sub">Всяка карта е страница от нашия общ дневник на пътуванията.</p>
+      </div>
+    </div>
+    <div class="years-grid" id="years-grid"></div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    <span data-i18n="footer_text">Еразъм+ Архив · Изграден от Алиса</span>
+    <span>hardyxstyle</span>
+  </div>
+</footer>
+
+<script src="data/index.js"></script>
+<script src="data/2025-2026.js"></script>
+<script src="js/common.js"></script>
+<script src="js/home.js"></script>
+</body>
+</html>
