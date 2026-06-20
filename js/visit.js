@@ -170,23 +170,52 @@
 
     const extraGallery = (visit.gallery || []).map(buildGalleryItem);
     const grid = document.getElementById("gallery-grid");
+    const loadMoreWrap = document.getElementById("gallery-load-more");
+    const loadMoreBtn = document.getElementById("gallery-load-more-btn");
+    const loadMoreCount = document.getElementById("gallery-load-more-count");
+    const loadMoreLabel = document.getElementById("load-more-label");
+    loadMoreLabel.textContent = loadMoreLabel.dataset[lang];
 
     if (extraGallery.length === 0) {
       grid.innerHTML = `<div class="gallery-empty">${lang === 'bg' ? 'Снимките и видеата от това посещение ще бъдат добавени скоро.' : 'Photos and videos from this visit will be added soon.'}</div>`;
+      loadMoreWrap.hidden = true;
       return;
     }
 
     const baseIndex = currentGallery.length;
     currentGallery = currentGallery.concat(extraGallery);
 
-    grid.innerHTML = extraGallery.map((item, i) =>
-      `<div class="gallery-item" data-index="${baseIndex + i}">${thumbMarkup(item)}</div>`
-    ).join("");
+    const PAGE_SIZE = 24;
+    let renderedCount = 0;
 
-    grid.querySelectorAll(".gallery-item").forEach(el => {
-      el.addEventListener("click", () => openLightbox(parseInt(el.dataset.index, 10)));
-    });
-    setupLazyVideos(grid);
+    function renderNextPage() {
+      const nextItems = extraGallery.slice(renderedCount, renderedCount + PAGE_SIZE);
+      const fragment = nextItems.map((item, i) => {
+        const globalIndex = baseIndex + renderedCount + i;
+        return `<div class="gallery-item" data-index="${globalIndex}">${thumbMarkup(item)}</div>`;
+      }).join("");
+      grid.insertAdjacentHTML("beforeend", fragment);
+
+      const newEls = Array.prototype.slice.call(grid.children, renderedCount);
+      newEls.forEach(el => {
+        el.addEventListener("click", () => openLightbox(parseInt(el.dataset.index, 10)));
+      });
+      setupLazyVideos(grid);
+
+      renderedCount += nextItems.length;
+      const remaining = extraGallery.length - renderedCount;
+
+      if (remaining > 0) {
+        loadMoreWrap.hidden = false;
+        loadMoreCount.textContent = `(${remaining})`;
+      } else {
+        loadMoreWrap.hidden = true;
+      }
+    }
+
+    grid.innerHTML = "";
+    renderNextPage();
+    loadMoreBtn.onclick = renderNextPage;
   }
 
   document.addEventListener("DOMContentLoaded", () => {
