@@ -27,7 +27,7 @@ window.ERASMUS_DATA["2025-2026"] = {
         bg: "Група ученици и учители от ППМГ „Акад. Никола Обрешков“ участваха в групова мобилност по програма Erasmus+ в Доло, Италия. Домакин на дейностите беше Liceo Statale „Galileo Galilei“, а учениците работиха по съвместния проект „Two seas, two communities, one Union“. Учителите наблюдаваха учебни часове и обмениха опит с италианските си колеги. Седмицата съчета учебна работа с културни посещения в Доло, Падуа, Венеция, Стра и Тревизо.",
         en: "A group of students and teachers from PPMG \"Akad. Nikola Obreshkov\" took part in a group mobility under the Erasmus+ programme in Dolo, Italy. The host of the activities was Liceo Statale \"Galileo Galilei\", and the students worked on the joint project \"Two seas, two communities, one Union\". The teachers observed lessons and exchanged experience with their Italian colleagues. The week combined academic work with cultural visits to Dolo, Padua, Venice, Stra and Treviso."
       },
-      introVideo: "assets/2025-2026/italia/video1.mp4",
+      introVideo: "https://youtu.be/qRoToRKCpZM",
       itinerary: [
         {
           title: { bg: "Ден 1 — Пристигане в Доло и първа среща с Италия", en: "Day 1 — Arrival in Dolo and first encounter with Italy" },
