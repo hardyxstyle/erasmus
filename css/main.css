@@ -484,7 +484,19 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 600; line-height
   border-radius: var(--radius-lg);
 }
 
-/* Lightbox */
+.gallery-load-more {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+.gallery-load-more__count {
+  opacity: 0.5;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  margin-left: 0.4rem;
+}
+
+/* ============ Lightbox */
 .lightbox {
   position: fixed;
   inset: 0;
