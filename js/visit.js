@@ -8,7 +8,7 @@
     return /youtube\.com|youtu\.be/.test(url);
   }
   function youTubeEmbed(url) {
-    const idMatch = url.match(/(?:v=|youtu\.be\/)([\w-]{11})/);
+    const idMatch = url.match(/(?:v=|youtu\.be\/|shorts\/)([\w-]{11})/);
     const id = idMatch ? idMatch[1] : "";
     return `https://www.youtube.com/embed/${id}`;
   }
@@ -36,7 +36,8 @@
     if (!item) return;
 
     if (item.type === "youtube") {
-      container.innerHTML = `<iframe src="${youTubeEmbed(item.src)}" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+      const isShort = /shorts\//.test(item.src);
+      container.innerHTML = `<iframe class="${isShort ? 'is-vertical' : ''}" src="${youTubeEmbed(item.src)}" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
     } else if (item.type === "video") {
       container.innerHTML = `<video src="${item.src}" controls autoplay></video>`;
     } else {
@@ -52,16 +53,40 @@
 
   function thumbMarkup(item) {
     if (item.type === "youtube") {
-      const idMatch = item.src.match(/(?:v=|youtu\.be\/)([\w-]{11})/);
+      const idMatch = item.src.match(/(?:v=|youtu\.be\/|shorts\/)([\w-]{11})/);
       const thumb = idMatch ? `https://img.youtube.com/vi/${idMatch[1]}/hqdefault.jpg` : "";
-      return `<img src="${thumb}" loading="lazy" alt="">
+      return `<img src="${thumb}" loading="lazy" decoding="async" alt="">
         <span class="gallery-item__play"><svg viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg></span>`;
     }
     if (item.type === "video") {
-      return `<video src="${item.src}#t=0.1" preload="metadata" muted></video>
+      return `<video data-lazy-src="${item.src}#t=0.1" preload="none" muted></video>
         <span class="gallery-item__play"><svg viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg></span>`;
     }
-    return `<img src="${item.src}" loading="lazy" alt="">`;
+    return `<img src="${item.src}" loading="lazy" decoding="async" alt="">`;
+  }
+
+  function setupLazyVideos(container) {
+    const videos = container.querySelectorAll("video[data-lazy-src]");
+    if (!videos.length) return;
+
+    if (!("IntersectionObserver" in window)) {
+      // Fallback: just load them all if observer isn't supported
+      videos.forEach(v => { v.src = v.dataset.lazySrc; v.removeAttribute("data-lazy-src"); });
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const v = entry.target;
+          v.src = v.dataset.lazySrc;
+          v.removeAttribute("data-lazy-src");
+          observer.unobserve(v);
+        }
+      });
+    }, { rootMargin: "200px" });
+
+    videos.forEach(v => observer.observe(v));
   }
 
   function paragraphsHtml(text) {
@@ -85,7 +110,7 @@
         photosHtml = `<div class="itinerary-day__photos">` + dayPhotos.map((src) => {
           const globalIndex = galleryItems.length;
           galleryItems.push(buildGalleryItem(src));
-          return `<div class="itinerary-day__photo" data-index="${globalIndex}"><img src="${src}" loading="lazy" alt=""></div>`;
+          return `<div class="itinerary-day__photo" data-index="${globalIndex}"><img src="${src}" loading="lazy" decoding="async" alt=""></div>`;
         }).join("") + `</div>`;
       }
       return `
@@ -122,14 +147,18 @@
     document.getElementById("meta-date").textContent = visit.dateRange[lang];
 
     const introSection = document.getElementById("intro-video-section");
-    const introVideo = document.getElementById("intro-video");
+    const introWrap = document.getElementById("intro-video-wrap");
     if (visit.introVideo) {
       introSection.hidden = false;
-      if (introVideo.getAttribute("src") !== visit.introVideo) {
-        introVideo.setAttribute("src", visit.introVideo);
+      if (isYouTube(visit.introVideo)) {
+        const isShort = /shorts\//.test(visit.introVideo);
+        introWrap.innerHTML = `<iframe class="${isShort ? 'is-vertical' : ''}" src="${youTubeEmbed(visit.introVideo)}" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+      } else {
+        introWrap.innerHTML = `<video controls preload="metadata" src="${visit.introVideo}"></video>`;
       }
     } else {
       introSection.hidden = true;
+      introWrap.innerHTML = "";
     }
 
     renderItinerary(visit, lang, currentGallery);
@@ -157,6 +186,7 @@
     grid.querySelectorAll(".gallery-item").forEach(el => {
       el.addEventListener("click", () => openLightbox(parseInt(el.dataset.index, 10)));
     });
+    setupLazyVideos(grid);
   }
 
   document.addEventListener("DOMContentLoaded", () => {
