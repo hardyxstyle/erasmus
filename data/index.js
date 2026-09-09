@@ -26,7 +26,7 @@ window.I18N = {
     years_sub: "Всяка карта е страница от нашия общ дневник на пътуванията.",
     visits_in: "посещения",
     view_year: "Виж годината",
-    footer_text: "Еразъм+ Архив · Изграден от Алиса"
+    footer_text: "Еразъм+ Архив · ППМГ "Акад. Никола Обрешков" - гр. Бургас"
   },
   en: {
     nav_home: "Home",
@@ -45,6 +45,6 @@ window.I18N = {
     years_sub: "Each card is a page in our shared travel journal.",
     visits_in: "visits",
     view_year: "View year",
-    footer_text: "Erasmus+ Archive · Built by Alisa"
+    footer_text: "Erasmus+ Archive · PPMG"
   }
 };
