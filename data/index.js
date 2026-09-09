@@ -45,6 +45,6 @@ window.I18N = {
     years_sub: "Each card is a page in our shared travel journal.",
     visits_in: "visits",
     view_year: "View year",
-    footer_text: "Erasmus+ Archive · PPMG"
+    footer_text: 'Erasmus+ Archive · PPMG "Acad. Nikola Obreshkov" – Burgas'
   }
 };
